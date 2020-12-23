@@ -45,6 +45,10 @@ void push(stack_t **head, char *cmd, unsigned int n);
 void exec_f(stack_t **head, char *cmd, unsigned int n);
 void free_stack(stack_t *head);
 void pall(stack_t **head, unsigned int n);
+void pint(stack_t **head, unsigned int n);
+void pop(stack_t **head, unsigned int n);
+void swap(stack_t **head, unsigned int n);
+void add(stack_t **head, unsigned int n);
 
 
 #endif

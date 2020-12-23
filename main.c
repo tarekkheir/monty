@@ -1,12 +1,18 @@
 #include "monty.h"
 
+/**
+ *main - execute command from the monty file
+ *@ac: number of arguments
+ *@av: arguments
+ *Return: 0
+ */
 int main(int ac, char **av)
 {
 	stack_t *stack = NULL;
 	unsigned int n = 0;
 	char *str = NULL;
-	char chaine[2048];
-	char cmd[2][1024];
+	char chaine[512];
+	char cmd[2][512];
 	FILE *file;
 
 	if (ac != 2)
@@ -14,25 +20,23 @@ int main(int ac, char **av)
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	file = fopen("av[1]", "r");
+	file = fopen(av[1], "r");
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
-
-	while (fgets(chaine, 2048, file) != NULL)
+	while (fgets(chaine, 512, file) != NULL)
 	{
 		n++;
 		str = strtok(chaine, "\n\t\r ");
 		if (str == NULL || str == '\0')
 			continue;
 		strcpy(cmd[0], str);
-		str = strtok(NULL, "\n\t\r ");
-		strcpy(cmd[1], str);
-
 		if (strcmp(cmd[0], "push") == 0)
 		{
+			str = strtok(NULL, "\n\t\r ");
+			strcpy(cmd[1], str);
 			if (cmd[1] != NULL)
 				push(&stack, cmd[1], n);
 			else
@@ -40,9 +44,7 @@ int main(int ac, char **av)
 		}
 		else
 			exec_f(&stack, cmd[0], n);
-
 	}
-
 	free_stack(stack);
 	return (0);
 }
@@ -74,27 +76,19 @@ stack_t *add_node(stack_t **head, const int n)
 	return (*head);
 }
 
-void push(stack_t **head, char *cmd, unsigned int n)
-{
-	unsigned int i = 0;
 
-	while (i < strlen(cmd))
-	{
-		if (isdigit(cmd[i]) == 0)
-		{
-			fprintf(stderr, "L%u: usage: push integer\n", n);
-			exit(EXIT_FAILURE);
-		}
-		i++;
-	}
-	add_node(head, atoi(cmd));
-}
-
+/**
+ *exec_f - execute function than the main send
+ *@head: stack
+ *@cmd: string
+ *@n: line
+ */
 void exec_f(stack_t **head, char *cmd, unsigned int n)
 {
 	int i = 0;
 	instruction_t inst[] = {
-		{"pall", pall}, {NULL, NULL}
+		{"pall", pall}, {"pint", pint}, {"pop", pop}, {"swap", swap},
+		{"add", add}, {NULL, NULL}
 	};
 
 	while (inst[i].opcode)
@@ -111,7 +105,7 @@ void exec_f(stack_t **head, char *cmd, unsigned int n)
 }
 
 /**
- *free_dlistint - free the list allocation
+ *free_stack - free the list allocation
  *@head: list
  *Return: value
  */
@@ -125,19 +119,4 @@ void free_stack(stack_t *head)
 		free(head);
 		head = tmp;
 	}
-}
-
-void pall(stack_t **head, unsigned int n)
-{
-	stack_t *new = *head;
-
-	if (new != NULL)
-	{
-		while (new)
-		{
-			fprintf(stdout, "%u\n", new->n);
-			new = new->next;
-		}
-	}
-	(void)n;
 }
