@@ -30,7 +30,7 @@ int main(int ac, char **av)
 	{
 		n++;
 		str = strtok(chaine, "\n\t\r ");
-		if (str == NULL || str == '\0')
+		if (str == NULL || str == '\0' || strcmp(str, "nop") == 0)
 			continue;
 		strcpy(cmd[0], str);
 		if (strcmp(cmd[0], "push") == 0)

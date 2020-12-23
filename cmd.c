@@ -100,7 +100,7 @@ void swap(stack_t **head, unsigned int n)
 		tmp = tmp->next;
 	}
 
-	if (i < 2)
+	if (i < 2 || *head == NULL)
 	{
 		fprintf(stderr, "L%u: can't swap, stack too short\n", n);
 		exit(EXIT_FAILURE);
