@@ -46,7 +46,7 @@ int main(int ac, char **av)
 		else
 			exec_f(&stack, cmd, n);
 	}
-	free_stack(stack, cmd);
+	free_stack(stack, file);
 	return (0);
 }
 
@@ -110,7 +110,7 @@ void exec_f(stack_t **head, char *cmd, unsigned int n)
  *@head: list
  *Return: value
  */
-void free_stack(stack_t *head, char *cmd)
+void free_stack(stack_t *head, FILE *file)
 {
 	stack_t *tmp = NULL;
 
@@ -120,5 +120,5 @@ void free_stack(stack_t *head, char *cmd)
 		free(head);
 		head = tmp;
 	}
-	free(cmd);
+	fclose(file);
 }

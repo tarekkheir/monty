@@ -43,7 +43,7 @@ typedef struct instruction_s
 stack_t *add_node(stack_t **head, const int n);
 void push(stack_t **head, char *cmd, unsigned int n);
 void exec_f(stack_t **head, char *cmd, unsigned int n);
-void free_stack(stack_t *head, char *cmd);
+void free_stack(stack_t *head, FILE *file);
 void pall(stack_t **head, unsigned int n);
 void pint(stack_t **head, unsigned int n);
 void pop(stack_t **head, unsigned int n);
