@@ -72,7 +72,7 @@ void pop(stack_t **head, unsigned int n)
 
 	if (*head == NULL)
 	{
-		fprintf(stderr, "L%u: can't pop, stack empty\n", n);
+		fprintf(stderr, "L%u: can't pop an stack empty\n", n);
 		exit(EXIT_FAILURE);
 	}
 
