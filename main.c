@@ -104,7 +104,7 @@ void exec_f(stack_t **head, char *cmd, unsigned int n)
 	instruction_t inst[] = {
 		{"pall", pall}, {"pint", pint}, {"pop", pop}, {"swap", swap},
 		{"add", add}, {"sub", sub}, {"div", div_funct}, {"mul", mul},
-		{NULL, NULL}
+		{"mod", mod}, {NULL, NULL}
 	};
 
 	while (inst[i].opcode)
