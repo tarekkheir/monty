@@ -108,6 +108,7 @@ void exec_f(stack_t **head, char *cmd, unsigned int n)
 /**
  *free_stack - free the list allocation
  *@head: list
+ *@file: file to close
  *Return: value
  */
 void free_stack(stack_t *head, FILE *file)
