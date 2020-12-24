@@ -135,7 +135,7 @@ void mod(stack_t **head, unsigned int n)
 
 	if (i < 2)
 	{
-		fprintf(stderr, "L%u: can't add, stack too short\n", n);
+		fprintf(stderr, "L%u: can't mod, stack too short\n", n);
 		exit(EXIT_FAILURE);
 	}
 
