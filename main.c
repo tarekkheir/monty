@@ -12,7 +12,7 @@ int main(int ac, char **av)
 	unsigned int n = 0;
 	char *str = NULL;
 	char chaine[512];
-	char cmd[2][512];
+	char cmd[512];
 	FILE *file;
 
 	if (ac != 2)
@@ -30,22 +30,23 @@ int main(int ac, char **av)
 	{
 		n++;
 		str = strtok(chaine, "\n\t\r ");
-		if (str == NULL || str == '\0' || strcmp(str, "nop") == 0)
+		if (str == NULL || strcmp(str, "nop") == 0 || str == '\0')
 			continue;
-		strcpy(cmd[0], str);
-		if (strcmp(cmd[0], "push") == 0)
+		strcpy(cmd, str);
+		if (strcmp(cmd, "push") == 0)
 		{
 			str = strtok(NULL, "\n\t\r ");
-			strcpy(cmd[1], str);
-			if (cmd[1] != NULL)
-				push(&stack, cmd[1], n);
-			else
-				fprintf(stderr, "Usage: push %u\n", n);
+			if (str == NULL)
+			{
+				fprintf(stderr, "L%u: usage: push integer\n", n);
+				exit(EXIT_FAILURE);
+			}
+			push(&stack, strcpy(cmd, str), n);
 		}
 		else
-			exec_f(&stack, cmd[0], n);
+			exec_f(&stack, cmd, n);
 	}
-	free_stack(stack);
+	free_stack(stack, cmd);
 	return (0);
 }
 
@@ -109,7 +110,7 @@ void exec_f(stack_t **head, char *cmd, unsigned int n)
  *@head: list
  *Return: value
  */
-void free_stack(stack_t *head)
+void free_stack(stack_t *head, char *cmd)
 {
 	stack_t *tmp = NULL;
 
@@ -119,4 +120,5 @@ void free_stack(stack_t *head)
 		free(head);
 		head = tmp;
 	}
+	free(cmd);
 }

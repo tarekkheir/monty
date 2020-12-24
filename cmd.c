@@ -32,6 +32,8 @@ void push(stack_t **head, char *cmd, unsigned int n)
 
 	while (i < strlen(cmd))
 	{
+		if (cmd[i] == '-')
+			i++;
 		if (isdigit(cmd[i]) == 0)
 		{
 			fprintf(stderr, "L%u: usage: push integer\n", n);
