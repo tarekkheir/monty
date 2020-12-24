@@ -36,18 +36,30 @@ int main(int ac, char **av)
 		if (strcmp(cmd, "push") == 0)
 		{
 			str = strtok(NULL, "\n\t\r ");
-			if (str == NULL)
-			{
-				fprintf(stderr, "L%u: usage: push integer\n", n);
-				exit(EXIT_FAILURE);
-			}
-			push(&stack, strcpy(cmd, str), n);
+			exec_push(&stack, cmd, str, n);
 		}
 		else
 			exec_f(&stack, cmd, n);
 	}
 	free_stack(stack, file);
 	return (0);
+}
+
+/**
+ *exec_push - execute the push function
+ *@stack: stack
+ *@cmd: cmd to execute
+ *@str: str to compare
+ *@n: line
+ */
+void exec_push(stack_t **stack, char *cmd, char *str, unsigned int n)
+{
+	if (str == NULL)
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", n);
+		exit(EXIT_FAILURE);
+	}
+	push(stack, strcpy(cmd, str), n);
 }
 
 /**
