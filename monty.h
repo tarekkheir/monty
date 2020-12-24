@@ -50,6 +50,8 @@ void pint(stack_t **head, unsigned int n);
 void pop(stack_t **head, unsigned int n);
 void swap(stack_t **head, unsigned int n);
 void add(stack_t **head, unsigned int n);
-
+void sub(stack_t **head, unsigned int n);
+void mul(stack_t **head, unsigned int n);
+void div_funct(stack_t **head, unsigned int n);
 
 #endif

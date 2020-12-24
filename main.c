@@ -103,7 +103,8 @@ void exec_f(stack_t **head, char *cmd, unsigned int n)
 	int i = 0;
 	instruction_t inst[] = {
 		{"pall", pall}, {"pint", pint}, {"pop", pop}, {"swap", swap},
-		{"add", add}, {NULL, NULL}
+		{"add", add}, {"sub", sub}, {"div", div_funct}, {"mul", mul},
+		{NULL, NULL}
 	};
 
 	while (inst[i].opcode)
