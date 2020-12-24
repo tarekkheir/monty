@@ -30,6 +30,8 @@ int main(int ac, char **av)
 	{
 		n++;
 		str = strtok(chaine, "\n\t\r ");
+		if (str[0] == '#')
+			continue;
 		if (str == NULL || strcmp(str, "nop") == 0 || str == '\0')
 			continue;
 		strcpy(cmd, str);
